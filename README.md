@@ -44,12 +44,49 @@ Write the detailed procedure here
 
 **Program:**
 
-/* Program to design a half subtractor and full subtractor circuit and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
+/* Program to design a half subtractor and full subtractor circuit and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:25004301
 */
+full adder 
+module exp4add (a,b,c,x,y,z,sum,dif,car,bor);
+input a,b,c,x,y,z;
+output sum,dif,car,bor;
+assign sum = a^b^c;
+assign car = a&b | a&c | b&c;
+assign dif = x^y^z;
+assign bor = ~x&z | ~x&y | y&z;
+endmodule
+
+full subractor
+module exp4sub(a, b, bin, diff, bout);
+input a, b, bin;           // a, b, borrow-in
+output diff, bout;         // difference, borrow-out
+
+wire xor1, and1, and2;
+
+assign xor1 = a ^ b;       // First XOR stage
+assign diff = xor1 ^ bin;  // Final difference (XOR with borrow-in)
+
+assign and1 = ~a & b;      // Borrow from a-b
+assign and2 = ~xor1 & bin; // Borrow from borrow-in
+assign bout = and1 | and2; // Final borrow-out (OR)
+
+endmodule
 
 **RTL Schematic**
+full adder
+<img width="606" height="594" alt="Screenshot 2025-12-10 132600" src="https://github.com/user-attachments/assets/4ec6a550-33fc-4e94-8c6d-793cbcf975e0" />
+
+full subractor
+<img width="585" height="223" alt="Screenshot 2025-12-10 134311" src="https://github.com/user-attachments/assets/ff473383-e4a7-47a9-b7ae-78e4421b94a6" />
+
 
 **Output Timing Waveform**
+full adder
+<img width="1026" height="524" alt="Screenshot 2025-12-10 132935" src="https://github.com/user-attachments/assets/55b0a882-2017-4c0e-8be1-1f4d63d6ddf6" />
+
+full subractor
+<img width="1883" height="932" alt="Screenshot 2025-12-10 134539" src="https://github.com/user-attachments/assets/996fdc9f-ceea-425a-82f0-b085786666cc" />
+
 
 **Result:**
 
